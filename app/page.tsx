@@ -1,75 +1,69 @@
 'use client'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent } from '@/components/ui/card'
+import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@/components/ui/carousel'
+import { ScrollArea } from '@/components/ui/scroll-area'
+import { Badge } from '@/components/ui/badge'
 export default function Home() {
   return (
-    <main className="min-h-screen bg-background">
-      {/* Hero Section */}
-      <section className="container mx-auto px-4 pt-32 pb-24">
-        <div className="max-w-[800px] mx-auto text-center">
-          <h1 className="text-5xl font-bold tracking-tight lg:text-6xl bg-gradient-to-r from-foreground to-foreground/70 bg-clip-text text-transparent">
-            Your Vision Starts Here
-          </h1>
-          <p className="mt-6 text-xl text-muted-foreground max-w-[600px] mx-auto">
-            Transform this template into your perfect website using the chat interface.
-          </p>
-          <div className="mt-12 flex gap-4 justify-center">
-            <Button size="lg" className="px-8">Primary Action</Button>
-            <Button size="lg" variant="outline" className="px-8">Secondary</Button>
-          </div>
+    <main className="min-h-screen bg-[#FFE5E5] dark:bg-[#1a1a1a] p-8">
+      {/* Header Section */}
+      <section className="container mx-auto mb-12">
+        <h1 className="text-6xl font-bold text-center mb-6 bg-gradient-to-r from-purple-600 via-pink-500 to-orange-400 bg-clip-text text-transparent">
+          Digital Art Journal
+        </h1>
+        <div className="flex justify-center gap-2 flex-wrap">
+          <Badge variant="secondary" className="bg-purple-200 dark:bg-purple-900">maximalist</Badge>
+          <Badge variant="secondary" className="bg-pink-200 dark:bg-pink-900">eclectic</Badge>
+          <Badge variant="secondary" className="bg-orange-200 dark:bg-orange-900">artistic</Badge>
         </div>
       </section>
-      {/* Content Section */}
-      <section className="container mx-auto px-4 py-24 bg-muted/30">
-        <div className="grid md:grid-cols-3 gap-8 max-w-[1200px] mx-auto">
-          <Card className="bg-background border-none shadow-md hover:shadow-lg transition-shadow">
-            <CardContent className="pt-6">
-              <h3 className="text-xl font-semibold mb-3">Feature One</h3>
-              <p className="text-muted-foreground leading-relaxed">
-                Describe your first key feature or service here. Make it compelling and clear.
-              </p>
-            </CardContent>
-          </Card>
-          <Card className="bg-background border-none shadow-md hover:shadow-lg transition-shadow">
-            <CardContent className="pt-6">
-              <h3 className="text-xl font-semibold mb-3">Feature Two</h3>
-              <p className="text-muted-foreground leading-relaxed">
-                Highlight another important aspect of your business or project here.
-              </p>
-            </CardContent>
-          </Card>
-          <Card className="bg-background border-none shadow-md hover:shadow-lg transition-shadow">
-            <CardContent className="pt-6">
-              <h3 className="text-xl font-semibold mb-3">Feature Three</h3>
-              <p className="text-muted-foreground leading-relaxed">
-                Add a third compelling feature or benefit that sets you apart.
-              </p>
-            </CardContent>
-          </Card>
+      {/* Featured Art Carousel */}
+      <section className="container mx-auto mb-16">
+        <Carousel className="w-full max-w-5xl mx-auto">
+          <CarouselContent>
+            {[1, 2, 3].map((item) => (
+              <CarouselItem key={item}>
+                <Card className="bg-white/80 dark:bg-black/50 border-2 border-purple-300 dark:border-purple-800">
+                  <CardContent className="p-6">
+                    <div className="aspect-video bg-gradient-to-br from-pink-300 to-purple-400 rounded-lg flex items-center justify-center">
+                      <p className="text-white text-xl">Art Entry {item}</p>
+                    </div>
+                  </CardContent>
+                </Card>
+              </CarouselItem>
+            ))}
+          </CarouselContent>
+          <CarouselPrevious />
+          <CarouselNext />
+        </Carousel>
+      </section>
+      {/* Art Journal Grid */}
+      <section className="container mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {[1, 2, 3, 4, 5, 6].map((entry) => (
+            <Card key={entry} className="overflow-hidden hover:scale-105 transition-transform duration-200 bg-white/90 dark:bg-black/70 border-2 border-pink-200 dark:border-pink-800">
+              <CardContent className="p-6">
+                <div className="aspect-square mb-4 bg-gradient-to-bl from-orange-300 via-pink-400 to-purple-500 rounded-lg" />
+                <ScrollArea className="h-24">
+                  <h3 className="text-xl font-bold mb-2 bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
+                    Art Entry #{entry}
+                  </h3>
+                  <p className="text-sm text-muted-foreground">
+                    Your artistic journey and thoughts go here. Express yourself freely in this maximalist space.
+                  </p>
+                </ScrollArea>
+              </CardContent>
+            </Card>
+          ))}
         </div>
       </section>
-      {/* Additional Content Section */}
-      <section className="container mx-auto px-4 py-24">
-        <div className="max-w-[800px] mx-auto text-center">
-          <h2 className="text-3xl font-bold tracking-tight mb-6">
-            Ready to Get Started?
-          </h2>
-          <p className="text-muted-foreground mb-8">
-            Use the chat interface to customize this template. Add your content, change colors, or modify the layout.
-          </p>
-          <Button variant="outline" className="px-8">
-            Call to Action
-          </Button>
-        </div>
-      </section>
-      {/* Footer */}
-      <footer className="border-t">
-        <div className="container mx-auto px-4 h-16 flex items-center justify-center">
-          <p className="text-sm text-muted-foreground">
-            © 2024 Your Brand. All rights reserved.
-          </p>
-        </div>
-      </footer>
+      {/* Add Entry Button */}
+      <div className="fixed bottom-8 right-8">
+        <Button className="rounded-full w-16 h-16 bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 shadow-lg">
+          <span className="text-2xl">+</span>
+        </Button>
+      </div>
     </main>
   )
 }
